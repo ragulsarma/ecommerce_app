@@ -51,7 +51,7 @@ git clone https://github.com/ragulsarma/ecommerce_app.git
 Open the project with your code editor, and change into the **backend**:
 
 ```bash
-cd backend
+cd ecommerce_app
 ```
 
 Install dependencies:
