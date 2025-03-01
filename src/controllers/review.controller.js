@@ -9,11 +9,49 @@ exports.createReview = async (req, res) => {
     }
 };
 
-exports.getReviewsByProduct = async (req, res) => {
+
+exports.getAllReviews = async (req, res) => {
     try {
-        const reviews = await Review.findAll({ where: { ProductId: req.params.productId } });
+        const reviews = await Review.findAll();
         res.json(reviews);
     } catch (error) {
         res.status(500).json({ message: 'Error fetching reviews', error });
+    }
+};
+
+
+exports.getReviewsByProduct = async (req, res) => {
+    try {
+        const reviews = await Review.findAll({ where: { productId: req.params.productId } });
+        res.json(reviews);
+    } catch (error) {
+        res.status(500).json({ message: 'Error fetching reviews', error });
+    }
+};
+
+exports.getReviewsByUser = async (req, res) => {
+    try {
+        const reviews = await Review.findAll({ where: { userId: req.params.userId } });
+        res.json(reviews);
+    } catch (error) {
+        res.status(500).json({ message: 'Error fetching user reviews', error });
+    }
+};
+
+
+exports.updateReply = async (req, res) => {
+    try {
+        const { reply } = req.body;
+        const review = await Review.findByPk(req.params.reviewId);
+
+        if (!review) {
+            return res.status(404).json({ message: 'Review not found' });
+        }
+
+        review.reply = reply;
+        await review.save();
+        res.json({ message: 'Reply updated successfully', review });
+    } catch (error) {
+        res.status(500).json({ message: 'Error updating reply', error });
     }
 };

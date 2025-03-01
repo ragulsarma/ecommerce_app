@@ -1,33 +1,33 @@
 const { DataTypes } = require('sequelize');
 const { sequelize } = require('../config/database');
-const User = require('./User');
-const Product = require('./Product');
 
-const Wishlist = sequelize.define('Wishlist', {
-    id: { 
-        type: DataTypes.UUID, 
-        defaultValue: DataTypes.UUIDV4, 
-        primaryKey: true 
-    },
-    userId: {
+const Product = sequelize.define('Product', {
+    id: {
         type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
         allowNull: false,
-        references: {
-            model: User,
-            key: 'id'
-        }
+        primaryKey: true
     },
-    productId: {
-        type: DataTypes.UUID,
+    price: {
+        type: DataTypes.DECIMAL(10, 2),
+        allowNull: false
+    },
+    stock: {
+        type: DataTypes.INTEGER,
         allowNull: false,
-        references: {
-            model: Product,
-            key: 'id'
-        }
+        defaultValue: 0
+    },
+    name: {
+        type: DataTypes.STRING(255),
+        allowNull: false
+    },
+    description: {
+        type: DataTypes.TEXT,
+        allowNull: true
     }
+}, {
+    tableName: 'products',
+    timestamps: false  // 🚀 Disable automatic timestamps
 });
 
-Wishlist.belongsTo(User, { foreignKey: 'userId' });
-Wishlist.belongsTo(Product, { foreignKey: 'productId' });
-
-module.exports = Wishlist;
+module.exports = Product;
