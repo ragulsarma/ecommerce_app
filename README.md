@@ -10,6 +10,13 @@ A backend service for an E-Commerce system where users can browse products, subm
 
 ---
 
+## 📽️ App Demo
+Below is a recorded demonstration of the app in action:
+
+[🎥 Watch the Video](https://drive.google.com/file/d/1lJ1o8uX6MTjLcpLbzzTvPDtqXfoYfLF0/view?usp=sharing)
+
+---
+
 ## 📌 Features & Roles  
 
 ### 👤 **Admin**  
